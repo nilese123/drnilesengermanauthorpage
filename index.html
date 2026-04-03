@@ -183,6 +183,11 @@
         let isPlaying = false;
 
         musicBtn.addEventListener('click', () => {
+            <div class="p-6 bg-black/40 border-l-4 border-orange-500">
+    <h3 class="text-2xl font-bold text-white mb-2">Back to the Future (1985)</h3>
+    <p class="text-xs text-orange-300 mb-4 tracking-widest font-bold">RATING: PG | NOIR STATUS: TIME-WARPED</p>
+    <p class="text-slate-400 leading-relaxed">The classic time travel comedy! Marty McFly becomes the reason his parents get together. Even after 40 years, it's worth a rewatch for the subtle, mindbending theories and the bootstrap paradox at the end.</p>
+</div>
             if (isPlaying) {
                 music.pause();
                 musicBtn.classList.remove('playing');
