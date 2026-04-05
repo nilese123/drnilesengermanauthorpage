@@ -23,18 +23,13 @@
             filter: blur(20px);
             opacity: 0.3;
             z-index: -1;
+            animation: sunPulse 4s infinite alternate ease-in-out;
         }
 
-        /* Animated Scanlines */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
+       @keyframes sunPulse {
+            from { opacity: 0.2; transform: translateX(-50%) scale(1); filter: blur(20px); }
+            to { opacity: 0.5; transform: translateX(-50%) scale(1.05); filter: blur(30px); }
+    
 
         .fade-in { animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
