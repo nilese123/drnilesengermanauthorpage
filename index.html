@@ -9,6 +9,24 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; margin: 0; }
         .neon-text-pink { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        .retro-button {
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: 2px solid #ff8000;
+            padding: 10px 20px;
+            color: #ff8000;
+            background: transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-shadow: 0 0 5px #ff8000;
+            box-shadow: 0 0 10px rgba(255, 128, 0, 0.2);
+        }
+        .retro-button:hover {
+            background: #ff8000;
+            color: #000;
+            box-shadow: 0 0 20px #ff8000;
+        }
         
         /* The Synthwave Sun */
         .retro-sun {
@@ -85,14 +103,16 @@
         });
 
         const contentData = {
-            home: `
+           home: `
                 <div class="pt-40 pb-20 px-6 max-w-4xl mx-auto fade-in text-center">
                     <h1 class="text-6xl font-black mb-6 italic text-white neon-text-pink uppercase tracking-tighter">Neon Night-Time Reads</h1>
-                    <p class="text-xl text-cyan-400 mb-8 leading-relaxed font-bold tracking-wide italic">Digital Noir and Middle-Grade Adventures.</p>
-                    <div class="p-6 bg-black/40 border border-cyan-500/30 inline-block">
-                        <h4 class="text-orange-400 font-bold mb-2 uppercase tracking-widest">Latest Release</h4>
-                        <p class="text-slate-400">@tonyli1989 - Available Now</p>
-                    </div>
+                    <p class="text-xl text-cyan-400 mb-12 leading-relaxed font-bold tracking-wide italic">Digital Noir and Middle-Grade Adventures.</p>
+                    
+                    <a href="https://www.amazon.com/dp/B0CX96ZJ64" target="_blank" class="no-underline">
+                        <button class="retro-button font-bold">
+                            LATEST RELEASE: @tonyli1989
+                        </button>
+                    </a>
                 </div>`,
             store: `<div class="pt-40 px-6 max-w-4xl mx-auto"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">Store</h2> <p class="text-slate-400 italic">Signed copies and consulting services coming soon...</p> </div>`,
             arcade: `<div class="pt-40 px-6 max-w-4xl mx-auto"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-cyan-500">Arcade</h2> <p class="text-slate-400 italic">Retro experiences loading...</p> </div>`,
