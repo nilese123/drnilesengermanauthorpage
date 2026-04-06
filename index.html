@@ -28,7 +28,7 @@
             box-shadow: 0 0 20px #ff8000;
         }
         
-        /* The Synthwave Sun */
+        /* The Synthwave Sun with Lines */
         .retro-sun {
             position: fixed;
             bottom: -50px;
@@ -39,22 +39,38 @@
             background: linear-gradient(to bottom, #ff00ff 0%, #ff8000 100%);
             border-radius: 50%;
             filter: blur(20px);
-            opacity: 0.3;
+            opacity: 0.4;
             z-index: -1;
             animation: sunPulse 4s infinite alternate ease-in-out;
+            mask-image: repeating-linear-gradient(0deg, black, black 15px, transparent 20px);
         }
 
-       @keyframes sunPulse {
-            from { opacity: 0.2; transform: translateX(-50%) scale(1); filter: blur(20px); }
-            to { opacity: 0.5; transform: translateX(-50%) scale(1.05); filter: blur(30px); }
-    
+        /* Tron Ground Grid */
+        .ground-grid {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) perspective(500px) rotateX(60deg);
+            width: 200vw;
+            height: 50vh;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+        }
 
-        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes sunPulse {
+            from { opacity: 0.3; transform: translateX(-50%) scale(1); }
+            to { opacity: 0.6; transform: translateX(-50%) scale(1.05); }
+        }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="retro-sun"></div>
+    <div class="ground-grid"></div>
     <div class="scanlines"></div>
  <audio id="bg-music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
