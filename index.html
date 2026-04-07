@@ -38,16 +38,13 @@
             text-shadow: 0 0 5px #ff8000;
             box-shadow: 0 0 10px rgba(255, 128, 0, 0.2);
         }
-            text-shadow: 0 0 5px #ff8000;
-            box-shadow: 0 0 10px rgba(255, 128, 0, 0.2);
-        }
+        
         .retro-button:hover {
             background: #ff8000;
             color: #000;
             box-shadow: 0 0 20px #ff8000;
         }
         
-        /* The Synthwave Sun with Lines */
         .retro-sun {
             position: fixed;
             bottom: -50px;
@@ -64,7 +61,6 @@
             mask-image: repeating-linear-gradient(0deg, black, black 15px, transparent 20px);
         }
 
-        /* Tron Ground Grid */
         .ground-grid {
             position: fixed;
             bottom: 0;
@@ -85,13 +81,14 @@
             to { opacity: 0.6; transform: translateX(-50%) scale(1.05); }
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
     </style>
 </head>
 <body>
     <div class="retro-sun"></div>
     <div class="ground-grid"></div>
-    <div class="scanlines"></div>
- <audio id="bg-music" loop>
+    
+    <audio id="bg-music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
@@ -138,40 +135,35 @@
         });
 
         const contentData = {
-           home: `
+            home: `
                 <div class="pt-40 pb-20 px-6 max-w-4xl mx-auto fade-in text-center">
                     <h1 class="text-6xl font-black mb-6 italic text-white neon-text-pink uppercase tracking-tighter">Neon Night-Time Reads</h1>
                     <p class="text-xl text-cyan-400 mb-12 leading-relaxed font-bold tracking-wide italic">Digital Noir and Middle-Grade Adventures.</p>
                     <p class="sprawl-text text-sm">Welcome to the sprawl</p>
-                    
-                    <a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/ref=sr_1_2?dib=eyJ2IjoiMSJ9.hEseuWjvnDd95NbXIhiO26ZVkagAqAZuLIDPYmwAJTY.UGiY85NdqD2aR7XFWyXYO8RsWLnq461PQ5BJWsSUsTs&dib_tag=se&keywords=niles+engerman&qid=1775511948&sr=8-2" target="_blank" class="no-underline">
-                        <button class="retro-button font-bold">
-                            LATEST RELEASE: @tonyli1989
-                        </button>
+                    <a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank" class="no-underline">
+                        <button class="retro-button font-bold">LATEST RELEASE: @tonyli1989</button>
                     </a>
                 </div>`,
-            store: `<div class="pt-40 px-6 max-w-4xl mx-auto"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">Store</h2> <p class="text-slate-400 italic">Signed copies and consulting services coming soon...</p> </div>`,
-           arcade: `
-    <div class="pt-40 pb-20 px-6 max-w-6xl mx-auto fade-in">
-        <h2 class="text-5xl font-black mb-12 italic text-cyan-500 uppercase tracking-tighter text-center">Neural Arcade</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-8 bg-black/60 border-2 border-cyan-500/50 rounded-lg group hover:border-pink-500 transition-all">
-                <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">Sector-9 Runner</h3>
-                <p class="text-cyan-400 text-xs mb-4 font-bold">STATUS: READY TO PLAY</p>
-                <p class="text-slate-400 mb-6 italic">Navigate the neon sprawl. Avoid the sentinels.</p>
-                <button class="retro-button w-full">INSERT COIN (PLAY)</button>
-            </div>
-
-            <div class="p-8 bg-black/60 border-2 border-cyan-500/50 rounded-lg group hover:border-pink-500 transition-all">
-                <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">VHS Quest</h3>
-                <p class="text-pink-500 text-xs mb-4 font-bold">STATUS: LOADING...</p>
-                <p class="text-slate-400 mb-6 italic">A middle-grade adventure through the cursed video store.</p>
-                <button class="retro-button w-full opacity-50 cursor-not-allowed">LOCKED</button>
-            </div>
-        </div>
-    </div>`,
-            gallery: `<div class="pt-40 px-6 max-w-4xl mx-auto"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">Gallery</h2> <p class="text-slate-400 italic">Visual artifacts from the 80s and beyond...</p> </div>`,
+            store: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">Store</h2> <p class="text-slate-400 italic">Signed copies and consulting services coming soon...</p> </div>`,
+            arcade: `
+                <div class="pt-40 pb-20 px-6 max-w-6xl mx-auto fade-in">
+                    <h2 class="text-5xl font-black mb-12 italic text-cyan-500 uppercase tracking-tighter text-center">Neural Arcade</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-8 bg-black/60 border-2 border-cyan-500/50 rounded-lg group hover:border-pink-500 transition-all flex flex-col">
+                            <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">Sector-9 Runner</h3>
+                            <p class="text-cyan-400 text-xs mb-4 font-bold">STATUS: READY TO PLAY</p>
+                            <p class="text-slate-400 mb-6 italic">Navigate the neon sprawl. Avoid the sentinels.</p>
+                            <a href="https://neave.com/pacman/" target="_blank" class="retro-button w-full block text-center no-underline mt-auto">INSERT COIN (PLAY)</a>
+                        </div>
+                        <div class="p-8 bg-black/60 border-2 border-cyan-500/50 rounded-lg group hover:border-pink-500 transition-all flex flex-col">
+                            <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">VHS Quest</h3>
+                            <p class="text-pink-500 text-xs mb-4 font-bold">STATUS: LOADING...</p>
+                            <p class="text-slate-400 mb-6 italic">A middle-grade adventure through the cursed video store.</p>
+                            <button class="retro-button w-full opacity-50 cursor-not-allowed mt-auto">LOCKED</button>
+                        </div>
+                    </div>
+                </div>`,
+            gallery: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">Gallery</h2> <p class="text-slate-400 italic">Visual artifacts from the 80s and beyond...</p> </div>`,
             movies: `
                 <div class="pt-40 pb-20 px-6 max-w-4xl mx-auto fade-in">
                     <h2 class="text-5xl font-black mb-12 italic text-orange-500 uppercase tracking-tighter">VHS CRITIQUES</h2>
@@ -187,24 +179,4 @@
                             <p class="text-slate-400 leading-relaxed">The pinnacle of digital kinetic energy. Superior to modern animation.</p>
                         </div>
                         <div class="p-6 bg-black/40 border-l-4 border-orange-500">
-                            <h3 class="text-2xl font-bold text-white mb-2">Back to the Future (1985)</h3>
-                            <p class="text-xs text-orange-300 mb-4 tracking-widest font-bold uppercase">Rating: PG | Status: Time-Warped</p>
-                            <p class="text-slate-400 leading-relaxed">This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together. It stands the test of time with a high rewatchability factor and mindbending theories like the bootstrap paradox.</p>
-                        </div>
-                    </div>
-                </div>`,
-            talks: `<div class="pt-40 px-6 max-w-4xl mx-auto"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-cyan-500">Talks</h2> <p class="text-slate-400 italic">Speaking engagements and pedagogical workshops...</p> </div>`,
-            faq: `<div class="pt-40 px-6 max-w-4xl mx-auto"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">FAQ</h2> <p class="text-slate-400 italic">Frequently Asked Questions...</p> </div>`
-        };
-
-        function navigateTo(tab) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            if (contentData[tab]) {
-                mainContent.innerHTML = contentData[tab];
-            }
-        }
-
-        window.onload = () => navigateTo('home');
-    </script>
-</body>
-</html>
+                            <h3 class
