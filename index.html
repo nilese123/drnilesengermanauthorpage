@@ -1,200 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Niles P. Engerman | Author</title>
+    <meta charset="UTF-8"><title>Dr. Niles P. Engerman | Author</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; margin: 0; }
-        .neon-text-pink { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
-        .sprawl-text {
-            font-family: 'Courier New', Courier, monospace;
-            color: #00ffff;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-            animation: sprawlPulse 2s infinite alternate;
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        @keyframes sprawlPulse {
-            from { opacity: 0.7; text-shadow: 0 0 5px #00ffff; }
-            to { opacity: 1; text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff; }
-        }
-
-        .retro-button {
-            font-family: 'Courier New', Courier, monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            border: 2px solid #ff8000;
-            padding: 10px 20px;
-            color: #ff8000;
-            background: transparent;
-            transition: all 0.3s;
-            cursor: pointer;
-            text-shadow: 0 0 5px #ff8000;
-            box-shadow: 0 0 10px rgba(255, 128, 0, 0.2);
-        }
-        
-        .retro-button:hover {
-            background: #ff8000;
-            color: #000;
-            box-shadow: 0 0 20px #ff8000;
-        }
-        
-        .retro-sun {
-            position: fixed;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(to bottom, #ff00ff 0%, #ff8000 100%);
-            border-radius: 50%;
-            filter: blur(20px);
-            opacity: 0.4;
-            z-index: -1;
-            animation: sunPulse 4s infinite alternate ease-in-out;
-            mask-image: repeating-linear-gradient(0deg, black, black 15px, transparent 20px);
-        }
-
-        .ground-grid {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) perspective(500px) rotateX(60deg);
-            width: 200vw;
-            height: 50vh;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -2;
-            mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
-        }
-
-        @keyframes sunPulse {
-            from { opacity: 0.3; transform: translateX(-50%) scale(1); }
-            to { opacity: 0.6; transform: translateX(-50%) scale(1.05); }
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        body { background:#000; color:#fff; font-family:sans-serif; overflow-x:hidden; margin:0; }
+        .neon { text-shadow: 0 0 10px #f0f, 0 0 20px #f0f; font-style:italic; text-transform:uppercase; }
+        .grid { position:fixed; bottom:0; left:50%; transform:translateX(-50%) perspective(500px) rotateX(60deg); width:200vw; height:50vh; background-image: linear-gradient(rgba(0,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.2) 1px, transparent 1px); background-size: 50px 50px; z-index:-1; mask-image: linear-gradient(to top, #000, transparent); }
+        .sun { position:fixed; bottom:-50px; left:50%; transform:translateX(-50%); width:600px; height:600px; background:linear-gradient(#f0f, #ff8000); border-radius:50%; filter:blur(20px); opacity:0.4; z-index:-1; mask-image:repeating-linear-gradient(0deg, #000, #000 15px, transparent 20px); }
+        .btn { border:2px solid #ff8000; padding:10px 20px; color:#ff8000; text-transform:uppercase; font-family:monospace; transition: 0.3s; }
+        .btn:hover { background:#ff8000; color:#000; box-shadow: 0 0 20px #ff8000; }
+        .sprawl { font-family:monospace; color:#0ff; text-transform:uppercase; letter-spacing:0.3em; text-shadow:0 0 5px #0ff; animation: pulse 2s infinite alternate; }
+        @keyframes pulse { from { opacity: 0.5; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="retro-sun"></div>
-    <div class="ground-grid"></div>
-    
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <nav class="fixed top-0 w-full z-50 border-b border-cyan-500/30 bg-black/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
-                <span class="brand text-sm md:text-lg font-black tracking-widest text-white neon-text-pink italic uppercase">Dr. Niles Engerman</span>
-            </div>
-            <div class="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.3em] font-bold">
-                <button onclick="navigateTo('store')" class="text-cyan-400 hover:text-pink-500 transition-all">Store</button>
-                <button onclick="navigateTo('arcade')" class="text-cyan-400 hover:text-pink-500 transition-all">Arcade</button>
-                <button onclick="navigateTo('gallery')" class="text-cyan-400 hover:text-pink-500 transition-all">Gallery</button>
-                <button onclick="navigateTo('movies')" class="text-cyan-400 hover:text-pink-500 transition-all">Movies</button>
-                <button onclick="navigateTo('talks')" class="text-cyan-400 hover:text-pink-500 transition-all">Talks</button>
-                <button onclick="navigateTo('faq')" class="text-cyan-400 hover:text-pink-500 transition-all">FAQ</button>
-            </div>
-            <button id="music-btn" class="flex items-end gap-1 h-5 group" title="Toggle Synthwave Score">
-                <span class="ml-2 text-pink-500 group-hover:text-cyan-400 transition-colors text-[10px] font-bold tracking-widest">SCORE</span>
-            </button>
+    <div class="sun"></div><div class="grid"></div>
+    <nav class="fixed top-0 w-full p-6 border-b border-cyan-500/30 bg-black/80 backdrop-blur-md flex justify-between items-center z-50">
+        <span class="neon font-black tracking-widest cursor-pointer text-lg" onclick="go('home')">Dr. Niles Engerman</span>
+        <div class="flex gap-6 text-[10px] uppercase font-bold text-cyan-400">
+            <button onclick="go('home')">Home</button><button onclick="go('movies')">Movies</button><button onclick="go('arcade')">Arcade</button>
         </div>
     </nav>
-
-    <main id="main-content"></main>
-
-    <footer class="py-20 px-6 bg-black relative border-t border-cyan-500/20">
-        <div class="max-w-7xl mx-auto text-center text-[10px] tracking-[0.4em] text-slate-600 uppercase font-bold">
-            &copy; 2026 Engerman Educational Consulting, LLC
-        </div>
-    </footer>
-
+    <main id="content" class="pt-40 text-center px-6"></main>
     <script>
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-btn');
-        const mainContent = document.getElementById('main-content');
-        let isPlaying = false;
-
-        musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                music.pause();
-            } else {
-                music.play().catch(e => console.log("Interaction required"));
-            }
-            isPlaying = !isPlaying;
-        });
-
-        const contentData = {
-            home: `
-                <div class="pt-40 pb-20 px-6 max-w-4xl mx-auto fade-in text-center">
-                    <h1 class="text-6xl font-black mb-6 italic text-white neon-text-pink uppercase tracking-tighter">Neon Night-Time Reads</h1>
-                    <p class="text-xl text-cyan-400 mb-12 leading-relaxed font-bold tracking-wide italic">Digital Noir and Middle-Grade Adventures.</p>
-                    <p class="sprawl-text text-sm">Welcome to the sprawl</p>
-                    <a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank" class="no-underline">
-                        <button class="retro-button font-bold">LATEST RELEASE: @tonyli1989</button>
-                    </a>
-                </div>`,
-            store: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">Store</h2> <p class="text-slate-400 italic">Signed copies and consulting services coming soon...</p> </div>`,
-            arcade: `
-                <div class="pt-40 pb-20 px-6 max-w-6xl mx-auto fade-in">
-                    <h2 class="text-5xl font-black mb-12 italic text-cyan-500 uppercase tracking-tighter text-center">Neural Arcade</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="p-8 bg-black/60 border-2 border-cyan-500/50 rounded-lg group hover:border-pink-500 transition-all flex flex-col">
-                            <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">Sector-9 Runner</h3>
-                            <p class="text-cyan-400 text-xs mb-4 font-bold">STATUS: READY TO PLAY</p>
-                            <p class="text-slate-400 mb-6 italic">Navigate the neon sprawl. Avoid the sentinels.</p>
-                            <a href="https://neave.com/pacman/" target="_blank" class="retro-button w-full block text-center no-underline mt-auto">INSERT COIN (PLAY)</a>
-                        </div>
-                        <div class="p-8 bg-black/60 border-2 border-cyan-500/50 rounded-lg group hover:border-pink-500 transition-all flex flex-col">
-                            <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">VHS Quest</h3>
-                            <p class="text-pink-500 text-xs mb-4 font-bold">STATUS: LOADING...</p>
-                            <p class="text-slate-400 mb-6 italic">A middle-grade adventure through the cursed video store.</p>
-                            <button class="retro-button w-full opacity-50 cursor-not-allowed mt-auto">LOCKED</button>
-                        </div>
-                    </div>
-                </div>`,
-            gallery: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">Gallery</h2> <p class="text-slate-400 italic">Visual artifacts from the 80s and beyond...</p> </div>`,
-            movies: `
-                <div class="pt-40 pb-20 px-6 max-w-4xl mx-auto fade-in">
-                    <h2 class="text-5xl font-black mb-12 italic text-orange-500 uppercase tracking-tighter">VHS CRITIQUES</h2>
-                    <div class="space-y-8">
-                        <div class="p-6 bg-black/40 border-l-4 border-orange-500">
-                            <h3 class="text-2xl font-bold text-white mb-2">Blade Runner (1982)</h3>
-                            <p class="text-xs text-orange-300 mb-4 tracking-widest font-bold uppercase">Rating: 10/10 | Status: Maximum Noir</p>
-                            <p class="text-slate-400 leading-relaxed">The ultimate transmission. A rain-soaked masterpiece of the future.</p>
-                        </div>
-                        <div class="p-6 bg-black/40 border-l-4 border-cyan-500">
-                            <h3 class="text-2xl font-bold text-white mb-2">Akira (1988)</h3>
-                            <p class="text-xs text-cyan-300 mb-4 tracking-widest font-bold uppercase">Rating: 9.5/10 | Status: Explosive</p>
-                            <p class="text-slate-400 leading-relaxed">The pinnacle of digital kinetic energy. Superior to modern animation.</p>
-                        </div>
-                        <div class="p-6 bg-black/40 border-l-4 border-orange-500">
-                            <h3 class="text-2xl font-bold text-white mb-2">Back to the Future (1985)</h3>
-                            <p class="text-xs text-orange-300 mb-4 tracking-widest font-bold uppercase">Rating: PG | Status: Time-Warped</p>
-                            <p class="text-slate-400 leading-relaxed">Classic time travel. Marty McFly accidentally changes history and has to fix it before he fades away.</p>
-                        </div>
-                    </div>
-                </div>`,
-            talks: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-cyan-500">Talks</h2> <p class="text-slate-400 italic">Pedagogical workshops and speaking engagements...</p> </div>`,
-            faq: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">FAQ</h2> <p class="text-slate-400 italic">Frequently Asked Questions...</p> </div>`
+        const pages = {
+            home: `<h1 class="text-6xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
+            movies: `<h2 class="text-4xl text-orange-500 font-black mb-8 italic uppercase">VHS Critiques</h2><div class="max-w-2xl mx-auto text-left space-y-4"><div class="p-4 border-l-4 border-orange-500 bg-white/5"><b>Blade Runner:</b> Maximum Noir. A rain-soaked masterpiece.</div><div class="p-4 border-l-4 border-cyan-500 bg-white/5"><b>Back to the Future:</b> Marty must fix the timeline before he fades away.</div></div>`,
+            arcade: `<h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2><p class="text-slate-400 mb-8 italic">Avoid the sentinels.</p><a href="https://neave.com/pacman/" target="_blank" class="btn">Play Sector-9 Runner</a>`
         };
-
-        function navigateTo(page) {
-            mainContent.innerHTML = contentData[page] || contentData.home;
-            window.scrollTo(0, 0);
-        }
-
-        navigateTo('home');
+        function go(p) { document.getElementById('content').innerHTML = pages[p]; window.scrollTo(0,0); }
+        go('home');
     </script>
 </body>
 </html>
