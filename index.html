@@ -1,4 +1,140 @@
-const contentData = {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Niles P. Engerman | Author</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; margin: 0; }
+        .neon-text-pink { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        .sprawl-text {
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+            animation: sprawlPulse 2s infinite alternate;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        @keyframes sprawlPulse {
+            from { opacity: 0.7; text-shadow: 0 0 5px #00ffff; }
+            to { opacity: 1; text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff; }
+        }
+
+        .retro-button {
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: 2px solid #ff8000;
+            padding: 10px 20px;
+            color: #ff8000;
+            background: transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-shadow: 0 0 5px #ff8000;
+            box-shadow: 0 0 10px rgba(255, 128, 0, 0.2);
+        }
+        
+        .retro-button:hover {
+            background: #ff8000;
+            color: #000;
+            box-shadow: 0 0 20px #ff8000;
+        }
+        
+        .retro-sun {
+            position: fixed;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(to bottom, #ff00ff 0%, #ff8000 100%);
+            border-radius: 50%;
+            filter: blur(20px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: sunPulse 4s infinite alternate ease-in-out;
+            mask-image: repeating-linear-gradient(0deg, black, black 15px, transparent 20px);
+        }
+
+        .ground-grid {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) perspective(500px) rotateX(60deg);
+            width: 200vw;
+            height: 50vh;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+        }
+
+        @keyframes sunPulse {
+            from { opacity: 0.3; transform: translateX(-50%) scale(1); }
+            to { opacity: 0.6; transform: translateX(-50%) scale(1.05); }
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+    </style>
+</head>
+<body>
+    <div class="retro-sun"></div>
+    <div class="ground-grid"></div>
+    
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <nav class="fixed top-0 w-full z-50 border-b border-cyan-500/30 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
+                <span class="brand text-sm md:text-lg font-black tracking-widest text-white neon-text-pink italic uppercase">Dr. Niles Engerman</span>
+            </div>
+            <div class="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.3em] font-bold">
+                <button onclick="navigateTo('store')" class="text-cyan-400 hover:text-pink-500 transition-all">Store</button>
+                <button onclick="navigateTo('arcade')" class="text-cyan-400 hover:text-pink-500 transition-all">Arcade</button>
+                <button onclick="navigateTo('gallery')" class="text-cyan-400 hover:text-pink-500 transition-all">Gallery</button>
+                <button onclick="navigateTo('movies')" class="text-cyan-400 hover:text-pink-500 transition-all">Movies</button>
+                <button onclick="navigateTo('talks')" class="text-cyan-400 hover:text-pink-500 transition-all">Talks</button>
+                <button onclick="navigateTo('faq')" class="text-cyan-400 hover:text-pink-500 transition-all">FAQ</button>
+            </div>
+            <button id="music-btn" class="flex items-end gap-1 h-5 group" title="Toggle Synthwave Score">
+                <span class="ml-2 text-pink-500 group-hover:text-cyan-400 transition-colors text-[10px] font-bold tracking-widest">SCORE</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content"></main>
+
+    <footer class="py-20 px-6 bg-black relative border-t border-cyan-500/20">
+        <div class="max-w-7xl mx-auto text-center text-[10px] tracking-[0.4em] text-slate-600 uppercase font-bold">
+            &copy; 2026 Engerman Educational Consulting, LLC
+        </div>
+    </footer>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const mainContent = document.getElementById('main-content');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+            } else {
+                music.play().catch(e => console.log("Interaction required"));
+            }
+            isPlaying = !isPlaying;
+        });
+
+        const contentData = {
             home: `
                 <div class="pt-40 pb-20 px-6 max-w-4xl mx-auto fade-in text-center">
                     <h1 class="text-6xl font-black mb-6 italic text-white neon-text-pink uppercase tracking-tighter">Neon Night-Time Reads</h1>
@@ -44,11 +180,4 @@ const contentData = {
                         </div>
                         <div class="p-6 bg-black/40 border-l-4 border-orange-500">
                             <h3 class="text-2xl font-bold text-white mb-2">Back to the Future (1985)</h3>
-                            <p class="text-xs text-orange-300 mb-4 tracking-widest font-bold uppercase">Rating: PG | Status: Time-Warped</p>
-                            <p class="text-slate-400 leading-relaxed">This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together.</p>
-                        </div>
-                    </div>
-                </div>`,
-            talks: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-cyan-500">Talks</h2> <p class="text-slate-400 italic">Speaking engagements and pedagogical workshops...</p> </div>`,
-            faq: `<div class="pt-40 px-6 max-w-4xl mx-auto fade-in"> <h2 class="text-4xl text-white font-bold mb-8 italic uppercase text-pink-500">FAQ</h2> <p class="text-slate-400 italic">Frequently Asked Questions...</p> </div>`
-        };
+                            <p class="text-xs text-orange-300 mb-4 tracking-widest font-bold
