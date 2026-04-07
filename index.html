@@ -9,6 +9,22 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; margin: 0; }
         .neon-text-pink { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        .sprawl-text {
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+            animation: sprawlPulse 2s infinite alternate;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        @keyframes sprawlPulse {
+            from { opacity: 0.7; text-shadow: 0 0 5px #00ffff; }
+            to { opacity: 1; text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff; }
+        }
+
         .retro-button {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
@@ -19,6 +35,9 @@
             background: transparent;
             transition: all 0.3s;
             cursor: pointer;
+            text-shadow: 0 0 5px #ff8000;
+            box-shadow: 0 0 10px rgba(255, 128, 0, 0.2);
+        }
             text-shadow: 0 0 5px #ff8000;
             box-shadow: 0 0 10px rgba(255, 128, 0, 0.2);
         }
@@ -123,6 +142,7 @@
                 <div class="pt-40 pb-20 px-6 max-w-4xl mx-auto fade-in text-center">
                     <h1 class="text-6xl font-black mb-6 italic text-white neon-text-pink uppercase tracking-tighter">Neon Night-Time Reads</h1>
                     <p class="text-xl text-cyan-400 mb-12 leading-relaxed font-bold tracking-wide italic">Digital Noir and Middle-Grade Adventures.</p>
+                    <p class="sprawl-text text-sm">Welcome to the sprawl</p>
                     
                     <a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/ref=sr_1_2?dib=eyJ2IjoiMSJ9.hEseuWjvnDd95NbXIhiO26ZVkagAqAZuLIDPYmwAJTY.UGiY85NdqD2aR7XFWyXYO8RsWLnq461PQ5BJWsSUsTs&dib_tag=se&keywords=niles+engerman&qid=1775511948&sr=8-2" target="_blank" class="no-underline">
                         <button class="retro-button font-bold">
