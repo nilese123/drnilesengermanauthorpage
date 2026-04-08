@@ -36,13 +36,18 @@
             document.getElementById('content').innerHTML = `<button onclick="go('movies')" class="mb-4 text-cyan-400 text-[10px] uppercase tracking-widest">← Return to Library</button><h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">${t}</h2><div class="max-w-xl mx-auto p-6 border border-orange-500 bg-black/95 text-left text-slate-300 italic shadow-[0_0_15px_rgba(255,128,0,0.3)]">${reviews[t]}</div>`;
         }
         const pages = {
-            home: `<h1 class="text-5xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
-            store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><p class="text-slate-400 mb-8 italic text-sm">Signed copies and exclusive @tonyli1989 merchandise coming soon.</p><button class="btn opacity-50 cursor-not-allowed">Sector Closed</button>`,
+            home: `<h1 class="text-5xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
+            store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><p class="text-slate-400 mb-8 italic text-sm">Signed copies and merchandise coming soon.</p><button class="btn opacity-50 cursor-not-allowed">Sector Closed</button>`,
             arcade: `<h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2><p class="text-slate-400 mb-8 italic text-sm">Avoid the sentinels.</p><a href="https://neave.com/pacman/" target="_blank" class="btn">Play Sector-9 Runner</a>`,
             movies: `
                 <h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2>
-                <div class="inline-block p-1 border border-orange-500 bg-black mb-8 shadow-[0_0_15px_#ff8000]">
-                    <img src="https://static.vecteezy.com/system/resources/previews/010/851/527/original/vhs-tape-retro-80s-vintage-png.png" alt="VHS Tape" class="w-full max-w-xs mx-auto opacity-95">
+                <div class="inline-block p-4 border border-orange-500 bg-black mb-8 shadow-[0_0_15px_#ff8000]">
+                    <svg width="200" height="120" viewBox="0 0 24 24" fill="none" stroke="#ff8000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto opacity-90">
+                        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                        <circle cx="8" cy="12" r="2"></circle>
+                        <circle cx="16" cy="12" r="2"></circle>
+                        <line x1="2" y1="8" x2="22" y2="8"></line>
+                    </svg>
                 </div>
                 <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-1 max-w-6xl mx-auto pb-10">
                     ${Object.keys(reviews).map(t => `<button onclick="showReview('${t}')" class="btn">${t}</button>`).join('')}
