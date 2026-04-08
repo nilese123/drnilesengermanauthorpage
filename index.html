@@ -19,9 +19,9 @@
     <audio id="ms" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
     <nav class="fixed top-0 w-full p-6 border-b border-cyan-500/30 bg-black/80 backdrop-blur-md flex justify-between items-center z-50">
         <span class="neon font-black tracking-widest cursor-pointer text-lg" onclick="go('home')">Dr. Niles Engerman</span>
-        <div class="flex gap-6 text-[10px] uppercase font-bold text-cyan-400">
-            <button onclick="go('home')">Home</button><button onclick="go('store')">Store</button><button onclick="go('movies')">Movies</button>
-            <button onclick="m()" class="text-pink-500 border border-pink-500 px-2">SCORE</button>
+        <div class="flex gap-4 text-[9px] uppercase font-bold text-cyan-400">
+            <button onclick="go('home')">Home</button><button onclick="go('store')">Store</button><button onclick="go('arcade')">Arcade</button><button onclick="go('movies')">Movies</button>
+            <button onclick="m()" class="text-pink-500 border border-pink-500 px-1">SCORE</button>
         </div>
     </nav>
     <main id="content" class="pt-40 text-center px-6"></main>
@@ -30,7 +30,8 @@
         const pages = {
             home: `<h1 class="text-6xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
             store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><p class="text-slate-400 mb-8 italic text-sm">Signed copies and exclusive @tonyli1989 merchandise coming soon.</p><button class="btn opacity-50 cursor-not-allowed">Sector Closed</button>`,
-            movies: `<h2 class="text-4xl text-orange-500 font-black mb-8 italic uppercase">VHS Critiques</h2><div class="max-w-2xl mx-auto text-left space-y-4 text-sm"><div class="p-4 border-l-4 border-orange-500 bg-white/5"><b>Blade Runner:</b> Maximum Noir. A rain-soaked masterpiece.</div><div class="p-4 border-l-4 border-cyan-500 bg-white/5"><b>Back to the Future:</b> Marty McFly must fix the timeline before he fades away.</div></div>`
+            arcade: `<h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2><p class="text-slate-400 mb-8 italic text-sm">Avoid the sentinels in the sprawl.</p><a href="https://neave.com/pacman/" target="_blank" class="btn">Play Sector-9 Runner</a>`,
+            movies: `<h2 class="text-4xl text-orange-500 font-black mb-8 italic uppercase">VHS Critiques</h2><div class="max-w-2xl mx-auto text-left space-y-4 text-sm"><div class="p-4 border-l-4 border-orange-500 bg-white/5"><b>Blade Runner:</b> Maximum Noir.</div><div class="p-4 border-l-4 border-cyan-500 bg-white/5"><b>Back to the Future:</b> Marty McFly must fix the timeline.</div></div>`
         };
         function go(p) { document.getElementById('content').innerHTML = pages[p]; window.scrollTo(0,0); }
         function m() { if(ply){ms.pause();}else{ms.play();} ply=!ply; }
