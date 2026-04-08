@@ -8,7 +8,7 @@
         .neon { text-shadow: 0 0 10px #f0f, 0 0 20px #f0f; font-style:italic; text-transform:uppercase; }
         .grid { position:fixed; bottom:0; left:50%; transform:translateX(-50%) perspective(500px) rotateX(60deg); width:200vw; height:50vh; background-image: linear-gradient(rgba(0,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.2) 1px, transparent 1px); background-size: 50px 50px; z-index:-1; mask-image: linear-gradient(to top, #000, transparent); }
         .sun { position:fixed; bottom:-50px; left:50%; transform:translateX(-50%); width:600px; height:600px; background:linear-gradient(#f0f, #ff8000); border-radius:50%; filter:blur(20px); opacity:0.4; z-index:-1; mask-image:repeating-linear-gradient(0deg, #000, #000 15px, transparent 20px); }
-        .btn { border:2px solid #ff8000; padding:10px 20px; color:#ff8000; text-transform:uppercase; font-family:monospace; transition: 0.3s; cursor:pointer; }
+        .btn { border:2px solid #ff8000; padding:8px 15px; color:#ff8000; text-transform:uppercase; font-family:monospace; transition: 0.3s; cursor:pointer; font-size: 10px; }
         .btn:hover { background:#ff8000; color:#000; box-shadow: 0 0 20px #ff8000; }
         .sprawl { font-family:monospace; color:#0ff; text-transform:uppercase; letter-spacing:0.3em; text-shadow:0 0 5px #0ff; animation: pulse 2s infinite alternate; }
         @keyframes pulse { from { opacity: 0.5; } to { opacity: 1; } }
@@ -30,12 +30,36 @@
     </footer>
     <script>
         const ms = document.getElementById('ms'); let ply = false;
+        // ENTER YOUR REVIEWS HERE: Just replace "Review text" with your actual words.
+        const reviews = {
+            "Blade Runner": "A rain-soaked masterpiece of noir and synthetic life.",
+            "Back to the Future": "Marty McFly's race against time to save his own existence.",
+            "The Terminator": "A relentless cyborg assassin from the future.",
+            "Aliens": "A masterclass in tension and sci-fi action.",
+            "Robocop": "Part man, part machine, all cop. 80s satire at its best.",
+            "Predator": "An elite team hunted by an invisible extraterrestrial warrior.",
+            "Die Hard": "The ultimate 80s action film set in a high-rise tower.",
+            "Tron": "A pioneer in digital aesthetics and computer-world adventure.",
+            "Ghostbusters": "Who you gonna call? Paranormal investigation meets comedy gold.",
+            "The Thing": "The pinnacle of practical effects and claustrophobic horror.",
+            "Escape From NY": "Snake Plissken's rescue mission in a walled-off Manhattan.",
+            "Akira": "The definitive cyberpunk anime transmission.",
+            "WarGames": "Shall we play a game? A cold war tech thriller.",
+            "Big Trouble": "Jack Burton's supernatural adventure in Little China.",
+            "The Lost Boys": "80s vampire style at its absolute peak."
+        };
+
+        function showReview(title) {
+            document.getElementById('content').innerHTML = `<button onclick="go('movies')" class="mb-8 text-cyan-400 text-xs uppercase tracking-widest hover:text-pink-500">← Back to VHS Library</button><h2 class="text-4xl text-orange-500 font-black mb-8 italic uppercase">${title}</h2><div class="max-w-2xl mx-auto p-6 border-l-4 border-orange-500 bg-white/5 text-left text-slate-300 italic">${reviews[title]}</div>`;
+        }
+
         const pages = {
             home: `<h1 class="text-6xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
             store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><p class="text-slate-400 mb-8 italic text-sm">Signed copies and exclusive @tonyli1989 merchandise coming soon.</p><button class="btn opacity-50 cursor-not-allowed">Sector Closed</button>`,
             arcade: `<h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2><p class="text-slate-400 mb-8 italic text-sm">Avoid the sentinels.</p><a href="https://neave.com/pacman/" target="_blank" class="btn">Play Sector-9 Runner</a>`,
-            movies: `<h2 class="text-4xl text-orange-500 font-black mb-8 italic uppercase">VHS CRITIQUES</h2><p class="text-slate-400 mb-8 italic text-sm">Incoming transmissions... check back soon for the latest reviews.</p>`
+            movies: `<h2 class="text-4xl text-orange-500 font-black mb-8 italic uppercase">VHS Library</h2><p class="text-slate-400 mb-10 italic text-sm uppercase tracking-widest">Select a tape to play</p><div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">${Object.keys(reviews).map(title => `<button onclick="showReview('${title}')" class="btn">${title}</button>`).join('')}</div>`
         };
+
         function go(p) { document.getElementById('content').innerHTML = pages[p]; window.scrollTo(0,0); }
         function m() { if(ply){ms.pause();}else{ms.play();} ply=!ply; }
         go('home');
