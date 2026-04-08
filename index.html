@@ -29,8 +29,27 @@
     </footer>
     <script>
         const ms = document.getElementById('ms'); let ply = false;
-        let reviews = {"Blade Runner":"A rain-soaked masterpiece.","Back to the Future":"Timeline salvage.","The Terminator":"Cybernetic pursuit.","Aliens":"High-tension sci-fi.","Robocop":"Part man, part machine.","Predator":"Invisible hunter.","Die Hard":"High-rise action.","Tron":"Digital pioneer.","Ghostbusters":"Paranormal comedy.","The Thing":"Practical horror.","Escape From NY":"Snake Plissken.","Akira":"Anime transmission.","WarGames":"Global simulation.","Big Trouble":"Little China.","The Lost Boys":"Vampire style."};
-        for(let i=16; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending... Insert new data here."; }
+        // Your updated movie database
+        let reviews = {
+            "Blade Runner":"A rain-soaked masterpiece.",
+            "Back to the Future":"Timeline salvage.",
+            "The Terminator":"Cybernetic pursuit.",
+            "Aliens":"High-tension sci-fi.",
+            "Robocop":"Part man, part machine.",
+            "Predator":"Invisible hunter.",
+            "Die Hard":"High-rise action.",
+            "Tron":"Digital pioneer.",
+            "Ghostbusters":"Paranormal comedy.",
+            "The Thing":"Practical horror.",
+            "Escape From NY":"Snake Plissken.",
+            "Akira":"Anime transmission.",
+            "WarGames":"Global simulation.",
+            "Big Trouble":"Little China.",
+            "The Lost Boys":"Vampire style.",
+            "Lucas (1986)":"Rating: PG-13. Lucas (Corey Haim) tells the story of brilliant social outcast Lucas, who’s bent on winning over his crush, Maggie, amid his lower social and financial status. The problem: the one jock, played by Charlie Sheen, who stands in his way, is also his biggest fan. Will Lucas perform a modern-day miracle and outperform orange-crushing jocks (literally)? Will he cede victory to the jocks or just fizzle out? Director David Seltzer does a great job almost doubling for John Hughes, so jump on your Schwinn and take another ride through the ‘80s, and keep your eyes peeled for a great supporting role played by Winona Ryder."
+        };
+        // Fills the rest of the 100 slots (starting from 17 now)
+        for(let i=17; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending... Insert new data here."; }
 
         function showReview(t) {
             document.getElementById('content').innerHTML = `<button onclick="go('movies')" class="mb-4 text-cyan-400 text-[10px] uppercase tracking-widest">← Return to Library</button><h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">${t}</h2><div class="max-w-xl mx-auto p-6 border border-orange-500 bg-black/95 text-left text-slate-300 italic shadow-[0_0_15px_rgba(255,128,0,0.3)]">${reviews[t]}</div>`;
