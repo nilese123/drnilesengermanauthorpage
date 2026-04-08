@@ -30,31 +30,11 @@
     </footer>
     <script>
         const ms = document.getElementById('ms'); let ply = false;
-        const reviews = {
-            "Blade Runner": "A rain-soaked masterpiece of noir and synthetic life.",
-            "Back to the Future": "Marty McFly's race against time to save his own existence.",
-            "The Terminator": "A relentless cyborg assassin from the future.",
-            "Aliens": "A masterclass in tension and sci-fi action.",
-            "Robocop": "Part man, part machine, all cop.",
-            "Predator": "An elite team hunted by an invisible warrior.",
-            "Die Hard": "The ultimate 80s action film set in a high-rise tower.",
-            "Tron": "A pioneer in digital aesthetics and computer-world adventure.",
-            "Ghostbusters": "Paranormal investigation meets comedy gold.",
-            "The Thing": "The pinnacle of practical effects and horror.",
-            "Escape From NY": "Snake Plissken's rescue mission in Manhattan.",
-            "Akira": "The definitive cyberpunk anime transmission.",
-            "WarGames": "Shall we play a game? A cold war tech thriller.",
-            "Big Trouble": "Jack Burton's supernatural adventure in Little China.",
-            "The Lost Boys": "80s vampire style at its absolute peak."
-        };
-        function showReview(t) {
-            document.getElementById('content').innerHTML = `<button onclick="go('movies')" class="mb-6 text-cyan-400 text-xs uppercase tracking-widest">← Back</button><h2 class="text-4xl text-orange-500 font-black mb-6 italic uppercase">${t}</h2><div class="max-w-xl mx-auto p-6 border border-orange-500 bg-black/90 text-left text-slate-300 italic">${reviews[t]}</div>`;
-        }
         const pages = {
             home: `<h1 class="text-5xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
             store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><p class="text-slate-400 mb-8 italic text-sm">Signed copies and exclusive @tonyli1989 merchandise coming soon.</p><button class="btn opacity-50 cursor-not-allowed">Sector Closed</button>`,
             arcade: `<h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2><p class="text-slate-400 mb-8 italic text-sm">Avoid the sentinels.</p><a href="https://neave.com/pacman/" target="_blank" class="btn">Play Sector-9 Runner</a>`,
-            movies: `<h2 class="text-4xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2><p class="text-slate-400 mb-8 text-[10px] uppercase tracking-[0.3em]">Select a tape to play</p><div class="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-3xl mx-auto pb-10">${Object.keys(reviews).map(t => `<button onclick="showReview('${t}')" class="btn">${t}</button>`).join('')}</div>`
+            movies: `<h2 class="text-4xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2><p class="text-slate-400 mb-8 text-[10px] uppercase tracking-[0.3em]">Channel Offline... Standby for data transmission.</p>`
         };
         function go(p) { document.getElementById('content').innerHTML = pages[p]; window.scrollTo(0,0); }
         function m() { if(ply){ms.pause();}else{ms.play();} ply=!ply; }
