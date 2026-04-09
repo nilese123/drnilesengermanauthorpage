@@ -15,63 +15,14 @@
         @keyframes pulse { from { opacity: 0.5; } to { opacity: 1; } }
         
         /* Arcade Cabinet Styling */
-        .cabinet {
-            width: 280px;
-            height: 450px;
-            background: #111;
-            border: 4px solid #ff00ff;
-            box-shadow: 0 0 20px #ff00ff;
-            border-radius: 10px;
-            margin: 0 auto;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: linear-gradient(to bottom, #222 0%, #000 100%);
-        }
-        .marquee {
-            width: 90%;
-            height: 50px;
-            background: #ff00ff;
-            margin-top: 10px;
-            border: 2px solid #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 10px #fff;
-        }
+        .cabinet { width: 280px; height: 450px; background: #111; border: 4px solid #ff00ff; box-shadow: 0 0 20px #ff00ff; border-radius: 10px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; background-image: linear-gradient(to bottom, #222 0%, #000 100%); }
+        .marquee { width: 90%; height: 50px; background: #ff00ff; margin-top: 10px; border: 2px solid #fff; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 10px #fff; }
         .marquee-text { font-family: 'Press Start 2P', cursive; font-size: 14px; color: #fff; text-shadow: 2px 2px #000; }
-        .screen-bezel {
-            width: 85%;
-            height: 200px;
-            background: #222;
-            margin-top: 20px;
-            border: 3px solid #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .screen-static {
-            width: 100%;
-            height: 100%;
-            background: url('https://media.giphy.com/media/oEI9uWUic9V28/giphy.gif') center/cover;
-            opacity: 0.3;
-        }
-        .control-panel {
-            width: 100%;
-            height: 60px;
-            background: #333;
-            margin-top: auto;
-            border-top: 4px solid #ff00ff;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
+        .screen-bezel { width: 85%; height: 200px; background: #222; margin-top: 20px; border: 3px solid #333; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .scanlines { position:absolute; top:0; left:0; width:100%; height:100%; background: repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 1px, rgba(0,0,0,0.4) 2px); pointer-events:none; z-index:5; }
+        .control-panel { width: 100%; height: 60px; background: #333; margin-top: auto; border-top: 4px solid #ff00ff; display: flex; justify-content: space-around; align-items: center; }
         .joystick { width: 20px; height: 20px; background: red; border-radius: 50%; box-shadow: 0 5px #800; }
         .arcade-button { width: 15px; height: 15px; background: #0f0; border-radius: 50%; box-shadow: 0 3px #080; }
-        
         #game-canvas { width: 100%; height: 400px; background: #000; display: none; }
     </style>
 </head>
@@ -114,14 +65,14 @@
             "Akira":"Anime transmission.",
             "WarGames":"Global simulation.",
             "Big Trouble":"Little China.",
-            "The Lost Boys (1987)":"Rating: R. Corey Haim returns as your favorite nerd from Lucas, but this time it's double Corey (Feldman). Their comic book-obsessed brains lead them on a quest to expose the vampires who creep along the Santa Clara boardwalk led by David (Kiefer Sutherland).",
-            "Lucas (1986)":"Rating: PG-13. Corey Haim plays the titular character in this story of brilliant social outcast Lucas, who’s bent on winning over his crush, Maggie. Director David Seltzer does a great job doubling for John Hughes.",
-            "Gremlins (1984)":"Rating: PG. Don’t get them wet, don’t expose them to light, and definitely don't feed them after midnight. Buckle up for the iconic kitchen scene that enraged parents across the nation.",
-            "Sixteen Candles (1984)":"Rating: PG. Samantha Baker's family forgot her birthday. She's a modern-day Cinderella. Buckle up with Jake Ryan in his Porsche 944 for a neon-drenched ride through 1980s Chicago's North Shore.",
-            "Commando (1985)":"Rating: R. Arnold Schwarzenegger is John Matrix, on a mission to save his daughter. Solidified his status as the best one-liner delivery man in history. Features one of the best gear-up montages.",
-            "Ferris Bueller’s Day Off (1986)":"Rating: PG-13. Welcome back to John Hughes’s idealistic take on Chicago’s North Shore! High school senior Ferris ditches school for the best day ever. The prize is a 1961 Ferrari 250 GT California Spyder!",
-            "Beverly Hills Cop (1984)":"Rating: R. Eddie Murphy in his prime as Detroit police detective Axel Foley. A fish-out-of-water story as he tracks down his friend’s killer in Beverly Hills. Perfect blend of comedy and action.",
-            "Weird Science (1985)":"Rating: PG-13. Two nerdy misfits use a 1980s computer to create the perfect 'genie' girlfriend. What could go wrong!?"
+            "The Lost Boys (1987)":"Rating: R. Corey Haim and Corey Feldman lead a quest to expose the vampires who creep along the boardwalk.",
+            "Lucas (1986)":"Rating: PG-13. The story of brilliant social outcast Lucas, bent on winning over his crush, Maggie.",
+            "Gremlins (1984)":"Rating: PG. Don’t get them wet, don’t expose them to light, and definitely don't feed them after midnight.",
+            "Sixteen Candles (1984)":"Rating: PG. Samantha Baker's family forgot her birthday. A neon-drenched ride through 1980s Chicago's North Shore.",
+            "Commando (1985)":"Rating: R. Arnold is John Matrix on a mission to save his daughter.",
+            "Ferris Bueller’s Day Off (1986)":"Rating: PG-13. Ferris ditches school for the best day ever in a 1961 Ferrari.",
+            "Beverly Hills Cop (1984)":"Rating: R. Detroit cop Axel Foley tracking a killer in Beverly Hills.",
+            "Weird Science (1985)":"Rating: PG-13. Nerds use a computer to create the perfect girlfriend."
         };
         for(let i=23; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending... Insert new data here."; }
 
@@ -129,17 +80,10 @@
             document.getElementById("arcade-view").style.display = "none";
             const gameDiv = document.getElementById("game-canvas");
             gameDiv.style.display = "block";
-            
-            window.EJS_player = "#game-canvas";
-            window.EJS_core = "nes";
-            window.EJS_color = "#000000";
-            window.EJS_startOnLoaded = true;
+            window.EJS_player = "#game-canvas"; window.EJS_core = "nes"; window.EJS_color = "#000000"; window.EJS_startOnLoaded = true;
             window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
             window.EJS_gameUrl = "https://cdn.jsdelivr.net/gh/bubbls/UGS-file-encryption@07dd631136afe70d5b36871e4f387bc96fa4c261/Contra%20(USA).zip";
-
-            let loader = document.createElement("script");
-            loader.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js";
-            document.body.appendChild(loader);
+            let loader = document.createElement("script"); loader.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js"; document.body.appendChild(loader);
         }
 
         function showReview(t) {
@@ -157,7 +101,15 @@
                 <div id="arcade-view">
                     <div class="cabinet">
                         <div class="marquee"><span class="marquee-text">CONTRA</span></div>
-                        <div class="screen-bezel"><div class="screen-static"></div></div>
+                        <div class="screen-bezel">
+                            <div class="scanlines"></div>
+                            <svg width="100%" height="100%" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="200" height="120" fill="#000" />
+                                <text x="50%" y="45" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="18" fill="#f00" stroke="#fff" stroke-width="0.5">CONTRA</text>
+                                <text x="50%" y="65" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="6" fill="#fff">©1987 KONAMI</text>
+                                <rect x="40" y="80" width="8" height="20" fill="#0ff" /><rect x="150" y="80" width="8" height="20" fill="#f0f" />
+                            </svg>
+                        </div>
                         <div class="control-panel">
                             <div class="joystick"></div>
                             <div class="flex gap-2"><div class="arcade-button"></div><div class="arcade-button" style="background:red; box-shadow: 0 3px #800;"></div></div>
@@ -169,13 +121,7 @@
             movies: `
                 <h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2>
                 <div class="inline-block p-4 border border-orange-500 bg-black mb-8 shadow-[0_0_20px_#ff8000]">
-                    <svg width="220" height="130" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto opacity-90">
-                        <rect x="1" y="4" width="22" height="16" rx="1" fill="#111" stroke="#ff8000" stroke-width="0.5"/>
-                        <rect x="3" y="7" width="18" height="10" rx="0.5" fill="#222" stroke="#ff8000" stroke-width="0.3"/>
-                        <circle cx="7" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/><circle cx="7" cy="12" r="1" fill="#ff8000"/>
-                        <circle cx="17" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/><circle cx="17" cy="12" r="1" fill="#ff8000"/>
-                        <rect x="10" y="10" width="4" height="4" stroke="#ff8000" stroke-width="0.3"/>
-                    </svg>
+                    <svg width="220" height="130" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto opacity-90"><rect x="1" y="4" width="22" height="16" rx="1" fill="#111" stroke="#ff8000" stroke-width="0.5"/><rect x="3" y="7" width="18" height="10" rx="0.5" fill="#222" stroke="#ff8000" stroke-width="0.3"/><circle cx="7" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/><circle cx="7" cy="12" r="1" fill="#ff8000"/><circle cx="17" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/><circle cx="17" cy="12" r="1" fill="#ff8000"/><rect x="10" y="10" width="4" height="4" stroke="#ff8000" stroke-width="0.3"/></svg>
                 </div>
                 <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-1 max-w-6xl mx-auto pb-10">
                     ${Object.keys(reviews).map(t => `<button onclick="showReview('${t}')" class="btn">${t}</button>`).join('')}
