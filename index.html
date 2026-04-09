@@ -29,10 +29,9 @@
     </footer>
     <script>
         const ms = document.getElementById('ms'); let ply = false;
-        // Your updated movie database
         let reviews = {
             "Blade Runner":"A rain-soaked masterpiece.",
-            "Back to the Future":"Timeline salvage.",
+            "Back to the Future (1985)":"Rating: PG. This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together. Given this movie is over 40 years old, I encourage viewers to rewatch for its more subtle points, underscoring some of the more mindbending and macabre theories behind time travel. This film is an amazing feat, as it’s stood the test of time, availing itself to a high rewatchability factor. The next time around, ask yourself, how many times has Marty actually attempted this mission and failed? What about that famous song at the end? Bootstrap paradox, anyone??",
             "The Terminator":"Cybernetic pursuit.",
             "Aliens":"High-tension sci-fi.",
             "Robocop":"Part man, part machine.",
@@ -45,10 +44,9 @@
             "Akira":"Anime transmission.",
             "WarGames":"Global simulation.",
             "Big Trouble":"Little China.",
-            "The Lost Boys":"Vampire style.",
+            "The Boys":"Vampire style.",
             "Lucas (1986)":"Rating: PG-13. Lucas (Corey Haim) tells the story of brilliant social outcast Lucas, who’s bent on winning over his crush, Maggie, amid his lower social and financial status. The problem: the one jock, played by Charlie Sheen, who stands in his way, is also his biggest fan. Will Lucas perform a modern-day miracle and outperform orange-crushing jocks (literally)? Will he cede victory to the jocks or just fizzle out? Director David Seltzer does a great job almost doubling for John Hughes, so jump on your Schwinn and take another ride through the ‘80s, and keep your eyes peeled for a great supporting role played by Winona Ryder."
         };
-        // Fills the rest of the 100 slots (starting from 17 now)
         for(let i=17; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending... Insert new data here."; }
 
         function showReview(t) {
