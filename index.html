@@ -7,27 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body { background:#000; color:#fff; font-family:sans-serif; overflow-x:hidden; margin:0; }
-        .neon { text-shadow: 0 0 10px #f0f, 0 0 20px #f0f; font-style:italic; text-transform:uppercase; }
+        .neon { text-shadow: 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #f0f; font-style:italic; text-transform:uppercase; color: #fff; }
         .sun { position:fixed; bottom:-120px; left:50%; transform:translateX(-50%); width:600px; height:600px; background:linear-gradient(#f0f, #ff8000); border-radius:50%; filter:blur(20px); opacity:0.3; z-index:-1; }
         .btn { border:2px solid #ff8000; padding:6px; color:#ff8000; text-transform:uppercase; font-family:monospace; transition: 0.2s; cursor:pointer; font-size: 8px; background: rgba(0,0,0,0.9); text-align: center; min-width: 80px; }
         .btn:hover { background:#ff8000; color:#000; box-shadow: 0 0 15px #ff8000; }
-        .sprawl { font-family:monospace; color:#0ff; text-transform:uppercase; letter-spacing:0.3em; text-shadow:0 0 5px #0ff; animation: pulse 2s infinite alternate; }
-        @keyframes pulse { from { opacity: 0.5; } to { opacity: 1; } }
         
-        .cabinet { width: 280px; height: 450px; background: #111; border: 4px solid #ff00ff; box-shadow: 0 0 20px #ff00ff; border-radius: 10px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; background-image: linear-gradient(to bottom, #222 0%, #000 100%); }
-        .marquee { width: 90%; height: 50px; background: #ff00ff; margin-top: 10px; border: 2px solid #fff; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 10px #fff; }
-        .marquee-text { font-family: 'Press Start 2P', cursive; font-size: 14px; color: #fff; text-shadow: 2px 2px #000; }
-        .screen-bezel { width: 85%; height: 200px; background: #222; margin-top: 20px; border: 3px solid #333; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
-        .scanlines { position:absolute; top:0; left:0; width:100%; height:100%; background: repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 1px, rgba(0,0,0,0.4) 2px); pointer-events:none; z-index:5; }
+        /* Arcade Cabinet - Exact Styling from your Screenshot */
+        .cabinet { width: 280px; height: 450px; background: #111; border: 4px solid #ff00ff; box-shadow: 0 0 20px #ff00ff; border-radius: 10px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+        .marquee { width: 90%; height: 50px; background: #ff00ff; margin-top: 10px; border: 2px solid #fff; display: flex; justify-content: center; align-items: center; }
+        .marquee-text { font-family: 'Press Start 2P', cursive; font-size: 14px; color: #fff; }
+        .screen-bezel { width: 85%; height: 200px; background: #222; margin-top: 20px; border: 3px solid #333; position: relative; display: flex; justify-content: center; align-items: center; }
+        .scanlines { position:absolute; top:0; left:0; width:100%; height:100%; background: repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 1px, rgba(0,0,0,0.2) 2px); pointer-events:none; }
         .control-panel { width: 100%; height: 60px; background: #333; margin-top: auto; border-top: 4px solid #ff00ff; display: flex; justify-content: space-around; align-items: center; }
-        .joystick { width: 20px; height: 20px; background: red; border-radius: 50%; box-shadow: 0 5px #800; }
-        .arcade-button { width: 15px; height: 15px; background: #0f0; border-radius: 50%; box-shadow: 0 3px #080; }
-        #game-holder { width: 100%; height: 600px; display: none; background: #000; }
+        .joystick { width: 20px; height: 20px; background: red; border-radius: 50%; }
+        .arcade-button { width: 15px; height: 15px; background: #0f0; border-radius: 50%; }
+        
+        #game-holder { width: 100%; max-width: 800px; height: 600px; margin: 0 auto; display: none; background: #000; border: 2px solid #0ff; }
     </style>
 </head>
 <body>
     <div class="sun"></div>
     <audio id="ms" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
+    
     <nav class="fixed top-0 w-full p-6 border-b border-cyan-500/30 bg-black/80 backdrop-blur-md flex justify-between items-center z-50">
         <span class="neon font-black tracking-widest cursor-pointer text-lg" onclick="go('home')">Dr. Niles Engerman</span>
         <div class="flex gap-4 text-[9px] uppercase font-bold text-cyan-400">
@@ -38,38 +39,77 @@
             <button onclick="m()" class="text-pink-500 border border-pink-500 px-1">SCORE</button>
         </div>
     </nav>
+
     <main id="content" class="pt-28 pb-20 text-center px-6 min-h-[90vh] relative z-10"></main>
+
     <footer class="w-full py-8 text-center border-t border-cyan-500/20 bg-black relative z-50">
         <p class="text-[10px] tracking-[0.4em] text-slate-500 uppercase font-bold">&copy; 2026 Engerman Educational Consulting, LLC</p>
     </footer>
+
     <script>
         const ms = document.getElementById('ms'); let ply = false;
+        
         let reviews = {
             "Blade Runner":"A rain-soaked masterpiece.",
-            "Back to the Future (1985)":"Rating: PG. Escaping terrorists, Marty McFly becomes the reason his parents meet. Rewatch for the bootstrap paradox theories!",
-            "The Terminator (1984)":"Rating: R. Relentless bleakness from start to finish. Arnold is a master-class slasher wrapped in cybernetic skin.",
-            "Robocop (1987)":"Rating: R. Cyborgs, toxic waste, and Detroit. Follow Murphy as he recaptures his humanity."
+            "Back to the Future (1985)":"Rating: PG. Escaping terrorists, Marty McFly becomes the very reason why his parents get together. Given this movie is over 40 years old, I encourage viewers to rewatch for its more subtle points, underscoring some of the more mindbending theories behind time travel. Bootstrap paradox, anyone??",
+            "The Terminator (1984)":"Rating: R. Relentless bleakness; from the first frame to the last, hope is a luxury that this movie is not selling. Arnold is a master-class slasher wrapped in the skin of a cybernetic organism.",
+            "Robocop (1987)":"Rating: R. Cyborgs, toxic waste, heroes, and Detroit. Murphy's quest to exact vengeance while trying to recapture his humanity."
         };
         for(let i=5; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending..."; }
 
         function startContra() {
             document.getElementById("arcade-intro").style.display = "none";
             document.getElementById("game-holder").style.display = "block";
+
+            // Ultimate Game Stash Parameters - Directly using your provided info
             window.EJS_player = "#game-holder";
             window.EJS_core = "nes";
             window.EJS_gameUrl = "https://cdn.jsdelivr.net/gh/bubbls/UGS-file-encryption@07dd631136afe70d5b36871e4f387bc96fa4c261/Contra%20(USA).zip";
             window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
             window.EJS_startOnLoaded = true;
+
             let loader = document.createElement("script");
             loader.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js";
             document.body.appendChild(loader);
+
+            let cloak = document.createElement("script");
+            cloak.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@ae2fcc6d6a9cd051654fcc0519080db1f79cf2a7/storage/js/cloak.js";
+            document.body.appendChild(cloak);
         }
 
         const pages = {
-            home: `<h1 class="text-5xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p>`,
-            store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><button class="btn opacity-50">Sector Closed</button>`,
-            arcade: `<h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2><div id="arcade-intro"><div class="cabinet"><div class="marquee"><span class="marquee-text">CONTRA</span></div><div class="screen-bezel"><div class="scanlines"></div><svg width="100%" height="100%" viewBox="0 0 200 120"><rect width="200" height="120" fill="#000" /><text x="50%" y="45" text-anchor="middle" font-family="'Press Start 2P'" font-size="18" fill="#f00">CONTRA</text></svg></div><div class="control-panel"><div class="joystick"></div><div class="arcade-button"></div></div></div><button onclick="startContra()" class="btn py-4 mt-8 w-64 text-lg" style="background:#4CAF50; color:white;">INSERT COIN</button></div><div id="game-holder"></div>`,
-            movies: `<h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2><div class="grid grid-cols-5 md:grid-cols-10 gap-1">${Object.keys(reviews).map(t => `<button class="btn">${t}</button>`).join('')}</div>`
+            home: `
+                <h1 class="text-6xl font-black neon mb-6 tracking-tighter">NEON NIGHT-TIME READS</h1>
+                <p class="text-2xl text-cyan-400 mb-8 font-bold italic tracking-wide">Digital Noir and Middle-Grade Adventures.</p>
+                <div class="mt-20"><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank" class="btn text-xl py-4 px-10">LATEST RELEASE: @tonyli1989</a></div>`,
+            arcade: `
+                <h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase tracking-widest">NEURAL ARCADE</h2>
+                <div id="arcade-intro">
+                    <div class="cabinet">
+                        <div class="marquee"><span class="marquee-text">CONTRA</span></div>
+                        <div class="screen-bezel">
+                            <div class="scanlines"></div>
+                            <svg width="100%" height="100%" viewBox="0 0 200 120">
+                                <rect width="200" height="120" fill="#000" />
+                                <text x="50%" y="60" text-anchor="middle" font-family="'Press Start 2P'" font-size="20" fill="#f00">CONTRA</text>
+                            </svg>
+                        </div>
+                        <div class="control-panel">
+                            <div class="joystick"></div>
+                            <div class="flex gap-2"><div class="arcade-button"></div><div class="arcade-button" style="background:red;"></div></div>
+                        </div>
+                    </div>
+                    <button onclick="startContra()" class="btn py-4 mt-8 w-64 text-lg" style="background:#4CAF50; color:white; border:none; font-family:'Press Start 2P';">INSERT COIN</button>
+                </div>
+                <div id="game-holder"></div>`,
+            movies: `
+                <h2 class="text-3xl text-orange-500 font-black mb-10 italic uppercase tracking-widest">VHS LIBRARY</h2>
+                <div class="grid grid-cols-5 md:grid-cols-10 gap-2 max-w-6xl mx-auto">
+                    ${Object.keys(reviews).map(t => `<button class="btn border-orange-500">${t}</button>`).join('')}
+                </div>`,
+            store: `
+                <h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">THE SPRAWL STORE</h2>
+                <p class="text-slate-400 italic">Signed copies and exclusive @tonyli1989 merchandise coming soon.</p>`
         };
 
         function go(p) { document.getElementById('content').innerHTML = pages[p]; window.scrollTo(0,0); }
