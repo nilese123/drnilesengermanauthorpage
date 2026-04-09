@@ -31,10 +31,10 @@
         const ms = document.getElementById('ms'); let ply = false;
         let reviews = {
             "Blade Runner":"A rain-soaked masterpiece.",
-            "Back to the Future (1985)":"Rating: PG. This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together. Given this movie is over 40 years old (at the time of this review), I encourage viewers to rewatch for its more subtle points, underscoring some of the more mindbending and macabre theories behind time travel. This film is an amazing feat, as it’s stood the test of time, availing itself to a high rewatchability factor. The next time around, ask yourself, how many times has Marty actually attempted this mission and failed (like, what are the odds he succeeded on the first try)? What about that famous song at the end? Bootstrap paradox, anyone??",
+            "Back to the Future (1985)":"Rating: PG. This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together. Given this movie is over 40 years old, I encourage viewers to rewatch for its more subtle points, underscoring some of the more mindbending and macabre theories behind time travel. This film is an amazing feat, as it’s stood the test of time, availing itself to a high rewatchability factor. The next time around, ask yourself, how many times has Marty actually attempted this mission and failed? What about that famous song at the end? Bootstrap paradox, anyone??",
             "The Terminator (1984)":"Rating: R. What makes this film so great is its relentless bleakness; from the first frame to the last, hope is a luxury that this movie is not selling. Why is this great? Because this bleak atmosphere is exactly what our titular character, The Terminator (Arnold Schwarzenegger), is going for. Nothing can stand in his way—not even Bill Paxton’s classic punk outfit. From the industrial sounds of the classic opening soundtrack to the crunching of skulls and red Terminator eyes piercing the darkness, this movie is a tight, archetypal master-class slasher film wrapped in the skin of a cybernetic organism.",
             "Aliens":"High-tension sci-fi.",
-            "Robocop (1987)":"Rating: R. Where does one start?! Cyborgs, toxic waste, heroes, and Detroit, but this is no Beverly Hills Cop. THIS movie was rightfully threatened with an 'X' rating before getting edited (barely) down to a very hard 'R,' even by 2026 standards. What better backdrop than Detroit to feature a futuristic 1990s where being a cop was basically less dangerous than being a WWII kamikaze pilot? Jump into your titanium suit as you follow Robocop, a valiant human turned cyborg, as he goes on a quest to exact vengeance on his 'murderers' while trying to recapture his humanity.",
+            "Robocop (1987)":"Rating: R. Where does one start?! Cyborgs, toxic waste, heroes, and Detroit, but this is no Beverly Hills Cop. THIS movie was rightfully threatened with an 'X' rating before getting edited (barely) down to a very hard 'R,' even by 2026 standards. What better backdrop than Detroit to feature a futuristic 1990s where being a cop was basically less dangerous than being a WWII kamikaze pilot? Jump into your titanium suit as you follow Robocop, a valiant human turned cyborg, as he goes on a quest to exact vengeance on his 'murderers' while trying to recapture his humanity. This movie features truly villainous villains, including standout performances by Kurtwood Smith and Ronny Cox.",
             "Predator":"Invisible hunter.",
             "Die Hard":"High-rise action.",
             "Tron":"Digital pioneer.",
@@ -44,4 +44,46 @@
             "Akira":"Anime transmission.",
             "WarGames":"Global simulation.",
             "Big Trouble":"Little China.",
-            "The Lost Boys (1987
+            "The Lost Boys (1987)":"Rating: R. Corey Haim returns as your favorite nerd from Lucas, but this time it's double Corey (Feldman), and these two are not your typical geeks. Their comic book-obsessed brains lead them on a quest to expose the vampires who creep along the Santa Clara boardwalk (standing in for the real Santa Cruz), led by David (Kiefer Sutherland). Too numerous to list, the cast is rife with ‘80s stars, peppered with one notable saxophone scene. Will you be drawn in?",
+            "Lucas (1986)":"Rating: PG-13. Corey Haim plays the titular character in this story of brilliant social outcast Lucas, who’s bent on winning over his crush, Maggie. The problem: the jock, played by Charlie Sheen, who stands in his way is also his biggest fan. Director David Seltzer does a great job doubling for John Hughes, so jump on your Schwinn and take another ride through the ‘80s.",
+            "Gremlins (1984)":"Rating: PG. Gremlins is half the film duo that motivated the PG-13 rating. The little rule breakers begin as cuddly mogwai, but don’t get them wet, don’t expose them to light, and definitely don't feed them after midnight. Buckle up for the iconic kitchen scene that enraged parents as they watched their expectations for a wholesome Christmas movie slip away.",
+            "Sixteen Candles (1984)":"Rating: PG. Samantha Baker's family forgot her birthday. She's a modern-day Cinderella with an insufferable brother, a spoiled sister, and a roommate named Long Duck Dong. Buckle up with Jake Ryan in his Porsche 944 for a neon-drenched ride through 1980s Chicago's North Shore.",
+            "Commando (1985)":"Rating: R. Arnold Schwarzenegger is John Matrix, on a mission to save his daughter (Alyssa Milano). Solidified his status as the best one-liner delivery man in history. Violent action-comedy at its finest, featuring one of the best gear-up montages and a campy villain who idolizes Freddie Mercury.",
+            "Ferris Bueller’s Day Off (1986)":"Rating: PG-13. Welcome back to John Hughes’s idealistic take on Chicago’s North Shore! High school senior Ferris ditches school for the best day ever with Cameron and Sloane. A real-life version of Tom and Jerry, but the prize is a 1961 Ferrari 250 GT California Spyder!",
+            "Beverly Hills Cop (1984)":"Rating: R. Eddie Murphy in his prime as Detroit police detective Axel Foley. A fish-out-of-water story as he tracks down his friend’s killer in Beverly Hills. Perfect blend of comedy and action with a brief Damon Wayans cameo. You'll be torn between vacationing in BH or a Detroit pool hall!",
+            "Weird Science (1985)":"Rating: PG-13. Another John Hughes classic adding sci-fi to neon teen comedy. Anthony Michael Hall and Ilan Mitchell-Smith use a 1980s computer to create the perfect 'genie' girlfriend. Features an insane cameo by the late Bill Paxton as the bullying big brother.",
+            "Back to the Future (1985)": "Rating: PG. This film is an amazing feat, as it’s stood the test of time, availing itself to a high rewatchability factor. Bootstrap paradox, anyone??",
+            "The Terminator": "Arnold chose to terminate again, but this time it was as John Matrix."
+        };
+        for(let i=25; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending... Insert new data here."; }
+
+        function showReview(t) {
+            document.getElementById('content').innerHTML = `<button onclick="go('movies')" class="mb-4 text-cyan-400 text-[10px] uppercase tracking-widest">← Return to Library</button><h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">${t}</h2><div class="max-w-xl mx-auto p-6 border border-orange-500 bg-black/95 text-left text-slate-300 italic shadow-[0_0_15px_rgba(255,128,0,0.3)]">${reviews[t]}</div>`;
+        }
+        const pages = {
+            home: `<h1 class="text-5xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
+            store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><p class="text-slate-400 mb-8 italic text-sm">Signed copies and exclusive @tonyli1989 merchandise coming soon.</p><button class="btn opacity-50 cursor-not-allowed">Sector Closed</button>`,
+            arcade: `<h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2><p class="text-slate-400 mb-8 italic text-sm">Avoid the sentinels.</p><a href="https://neave.com/pacman/" target="_blank" class="btn">Play Sector-9 Runner</a>`,
+            movies: `
+                <h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2>
+                <div class="inline-block p-4 border border-orange-500 bg-black mb-8 shadow-[0_0_20px_#ff8000]">
+                    <svg width="220" height="130" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto opacity-90">
+                        <rect x="1" y="4" width="22" height="16" rx="1" fill="#111" stroke="#ff8000" stroke-width="0.5"/>
+                        <rect x="3" y="7" width="18" height="10" rx="0.5" fill="#222" stroke="#ff8000" stroke-width="0.3"/>
+                        <circle cx="7" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/>
+                        <circle cx="7" cy="12" r="1" fill="#ff8000"/>
+                        <circle cx="17" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/>
+                        <circle cx="17" cy="12" r="1" fill="#ff8000"/>
+                        <rect x="10" y="10" width="4" height="4" stroke="#ff8000" stroke-width="0.3"/>
+                    </svg>
+                </div>
+                <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-1 max-w-6xl mx-auto pb-10">
+                    ${Object.keys(reviews).map(t => `<button onclick="showReview('${t}')" class="btn">${t}</button>`).join('')}
+                </div>`
+        };
+        function go(p) { document.getElementById('content').innerHTML = pages[p]; window.scrollTo(0,0); }
+        function m() { if(ply){ms.pause();}else{ms.play();} ply=!ply; }
+        go('home');
+    </script>
+</body>
+</html>
