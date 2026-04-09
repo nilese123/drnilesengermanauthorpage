@@ -11,6 +11,8 @@
         .sun { position:fixed; bottom:-120px; left:50%; transform:translateX(-50%); width:600px; height:600px; background:linear-gradient(#f0f, #ff8000); border-radius:50%; filter:blur(20px); opacity:0.3; z-index:-1; }
         .btn { border:2px solid #ff8000; padding:6px; color:#ff8000; text-transform:uppercase; font-family:monospace; transition: 0.2s; cursor:pointer; font-size: 8px; background: rgba(0,0,0,0.9); text-align: center; min-width: 80px; }
         .btn:hover { background:#ff8000; color:#000; box-shadow: 0 0 15px #ff8000; }
+        .sprawl { font-family:monospace; color:#0ff; text-transform:uppercase; letter-spacing:0.3em; text-shadow:0 0 5px #0ff; animation: pulse 2s infinite alternate; }
+        @keyframes pulse { from { opacity: 0.5; } to { opacity: 1; } }
         
         /* Arcade Cabinet Styling */
         .cabinet { width: 280px; height: 450px; background: #111; border: 4px solid #ff00ff; box-shadow: 0 0 20px #ff00ff; border-radius: 10px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; background-image: linear-gradient(to bottom, #222 0%, #000 100%); }
@@ -22,8 +24,7 @@
         .joystick { width: 20px; height: 20px; background: red; border-radius: 50%; box-shadow: 0 5px #800; }
         .arcade-button { width: 15px; height: 15px; background: #0f0; border-radius: 50%; box-shadow: 0 3px #080; }
         
-        /* The container for the actual game */
-        #game-holder { width: 100%; max-width: 800px; height: 500px; margin: 20px auto; display: none; background: #000; border: 2px solid #0ff; box-shadow: 0 0 20px #0ff; }
+        #game-holder { width: 100%; max-width: 800px; height: 500px; margin: 0 auto; display: none; background: #000; border: 2px solid #0ff; }
     </style>
 </head>
 <body>
@@ -52,39 +53,42 @@
         
         let reviews = {
             "Blade Runner":"A rain-soaked masterpiece.",
-            "Back to the Future (1985)":"Rating: PG. This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together.",
-            "The Terminator (1984)":"Rating: R. What makes this film so great is its relentless bleakness.",
-            "Robocop (1987)":"Rating: R. Cyborgs, toxic waste, heroes, and Detroit."
+            "Back to the Future (1985)":"Rating: PG. This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together. Given this movie is over 40 years old, I encourage viewers to rewatch for its more subtle points, underscoring some of the more mindbending theories behind time travel. Bootstrap paradox, anyone??",
+            "The Terminator (1984)":"Rating: R. What makes this film so great is its relentless bleakness; from the first frame to the last, hope is a luxury that this movie is not selling. Arnold is a master-class slasher wrapped in the skin of a cybernetic organism.",
+            "Robocop (1987)":"Rating: R. Cyborgs, toxic waste, heroes, and Detroit. Jump into your titanium suit as you follow Murphy on a quest to exact vengeance while trying to recapture his humanity.",
+            "The Lost Boys (1987)":"Rating: R. Corey Haim and Corey Feldman lead a quest to expose vampires along the boardwalk.",
+            "Lucas (1986)":"Rating: PG-13. The story of brilliant social outcast Lucas, bent on winning over his crush.",
+            "Sixteen Candles (1984)":"Rating: PG. Samantha Baker's family forgot her birthday. A neon ride through Chicago's North Shore.",
+            "Ferris Bueller’s Day Off (1986)":"Rating: PG-13. Ferris ditches school for the best day ever in a 1961 Ferrari."
         };
-        for(let i=4; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending..."; }
+        for(let i=9; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending..."; }
 
-        // Logic from your provided "Ultimate Game Stash" snippet
         function startContra() {
             document.getElementById("arcade-intro").style.display = "none";
-            const gameContainer = document.getElementById("game-holder");
-            gameContainer.style.display = "block";
-
-            // Set global variables required by loader.js
+            document.getElementById("game-holder").style.display = "block";
             window.EJS_player = "#game-holder";
             window.EJS_core = "nes";
             window.EJS_gameUrl = "https://cdn.jsdelivr.net/gh/bubbls/UGS-file-encryption@07dd631136afe70d5b36871e4f387bc96fa4c261/Contra%20(USA).zip";
             window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
             window.EJS_startOnLoaded = true;
-            window.EJS_color = "#000000";
-
-            // Load the emulator script
-            let script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js";
-            document.body.appendChild(script);
-
-            // Load the cloak script
+            let loader = document.createElement("script");
+            loader.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js";
+            document.body.appendChild(loader);
             let cloak = document.createElement("script");
             cloak.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@ae2fcc6d6a9cd051654fcc0519080db1f79cf2a7/storage/js/cloak.js";
             document.body.appendChild(cloak);
         }
 
+        function showReview(t) {
+            document.getElementById('content').innerHTML = `
+                <button onclick="go('movies')" class="mb-4 text-cyan-400 text-[10px] uppercase tracking-widest">← Return to Library</button>
+                <h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">${t}</h2>
+                <div class="max-w-xl mx-auto p-6 border border-orange-500 bg-black/95 text-left text-slate-300 italic shadow-[0_0_15px_rgba(255,128,0,0.3)]">${reviews[t]}</div>`;
+        }
+
         const pages = {
-            home: `<h1 class="text-5xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p>`,
+            home: `<h1 class="text-5xl font-black neon mb-6">Neon Night-Time Reads</h1><p class="text-xl text-cyan-400 mb-8 font-bold italic">Digital Noir and Middle-Grade Adventures.</p><p class="sprawl mb-10 text-sm">Welcome to the sprawl</p><a href="https://www.amazon.com/Tonyli1989-Niles-Engerman/dp/B0GJPL8RPK/" target="_blank"><button class="btn font-bold">LATEST RELEASE: @tonyli1989</button></a>`,
+            store: `<h2 class="text-4xl text-pink-500 font-black mb-8 italic uppercase">The Sprawl Store</h2><p class="text-slate-400 mb-8 italic text-sm">Signed copies and exclusive @tonyli1989 merchandise coming soon.</p><button class="btn opacity-50 cursor-not-allowed">Sector Closed</button>`,
             arcade: `
                 <h2 class="text-4xl text-cyan-500 font-black mb-8 italic uppercase">Neural Arcade</h2>
                 <div id="arcade-intro">
@@ -103,4 +107,22 @@
                             <div class="flex gap-2"><div class="arcade-button"></div><div class="arcade-button" style="background:red;"></div></div>
                         </div>
                     </div>
-                    <button onclick="startContra()" class="btn py-4 mt-8 w-64 text-lg" style="font-family:'Press Start 2P', cursive; background:#4CAF50; color:white; border:none;">INSERT COIN</button
+                    <button onclick="startContra()" class="btn py-4 mt-8 w-64 text-lg" style="font-family:'Press Start 2P', cursive; background:#4CAF50; color:white; border:none;">INSERT COIN</button>
+                </div>
+                <div id="game-holder"></div>`,
+            movies: `
+                <h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2>
+                <div class="inline-block p-4 border border-orange-500 bg-black mb-8 shadow-[0_0_20px_#ff8000]">
+                    <svg width="180" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="22" height="16" rx="1" stroke="#ff8000" stroke-width="0.5"/><circle cx="7" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/><circle cx="17" cy="12" r="2.5" stroke="#ff8000" stroke-width="0.5"/></svg>
+                </div>
+                <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-1 max-w-6xl mx-auto pb-10">
+                    ${Object.keys(reviews).map(t => `<button onclick="showReview('${t}')" class="btn">${t}</button>`).join('')}
+                </div>`
+        };
+
+        function go(p) { document.getElementById('content').innerHTML = pages[p]; window.scrollTo(0,0); }
+        function m() { if(ply){ms.pause();}else{ms.play();} ply=!ply; }
+        go('home');
+    </script>
+</body>
+</html>
