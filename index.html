@@ -23,7 +23,7 @@
         .control-panel { width: 100%; height: 60px; background: #333; margin-top: auto; border-top: 4px solid #ff00ff; display: flex; justify-content: space-around; align-items: center; }
         .joystick { width: 20px; height: 20px; background: red; border-radius: 50%; box-shadow: 0 5px #800; }
         .arcade-button { width: 15px; height: 15px; background: #0f0; border-radius: 50%; box-shadow: 0 3px #080; }
-        #game-canvas { width: 100%; height: 400px; background: #000; display: none; }
+        #game { width: 100%; height: 400px; background: #000; display: none; }
     </style>
 </head>
 <body>
@@ -52,10 +52,10 @@
         
         let reviews = {
             "Blade Runner":"A rain-soaked masterpiece.",
-            "Back to the Future (1985)":"Rating: PG. This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together. Given this movie is over 40 years old (at the time of this review), I encourage viewers to rewatch for its more subtle points, underscoring some of the more mindbending and macabre theories behind time travel. This film is an amazing feat, as it’s stood the test of time, availing itself to a high rewatchability factor. The next time around, ask yourself, how many times has Marty actually attempted this mission and failed (like, what are the odds he succeeded on the first try)? What about that famous song at the end? Bootstrap paradox, anyone??",
-            "The Terminator (1984)":"Rating: R. What makes this film so great is its relentless bleakness; from the first frame to the last, hope is a luxury that this movie is not selling. Why is this great? Because this bleak atmosphere is exactly what our titular character, The Terminator (Arnold Schwarzenegger), is going for. Nothing can stand in his way—not even Bill Paxton’s classic punk outfit. From the industrial sounds of the classic opening soundtrack to the crunching of skulls and red Terminator eyes piercing the darkness, this movie is a tight, archetypal master-class slasher film wrapped in the skin of a cybernetic organism.",
+            "Back to the Future (1985)":"Rating: PG. This is the classic time travel comedy! Escaping terrorists, Marty McFly becomes the very reason why his parents get together. Given this movie is over 40 years old (at the time of this review), I encourage viewers to rewatch for its more subtle points, underscoring some of the more mindbending and macabre theories behind time travel. This film is an amazing feat, as it’s stood the test of time, availing itself to a high rewatchability factor.",
+            "The Terminator (1984)":"Rating: R. What makes this film so great is its relentless bleakness; from the first frame to the last, hope is a luxury that this movie is not selling. Why is this great? Because this bleak atmosphere is exactly what our titular character, The Terminator (Arnold Schwarzenegger), is going for.",
             "Aliens":"High-tension sci-fi.",
-            "Robocop (1987)":"Rating: R. Where does one start?! Cyborgs, toxic waste, heroes, and Detroit. Jump into your titanium suit as you follow Robocop, a valiant human turned cyborg, as he goes on a quest to exact vengeance on his 'murderers' while trying to recapture his humanity. This movie features truly villainous villains, including standout performances by Kurtwood Smith and Ronny Cox.",
+            "Robocop (1987)":"Rating: R. Where does one start?! Cyborgs, toxic waste, heroes, and Detroit. Jump into your titanium suit as you follow Robocop, a valiant human turned cyborg, as he goes on a quest to exact vengeance on his 'murderers' while trying to recapture his humanity.",
             "Predator":"Invisible hunter.",
             "Die Hard":"High-rise action.",
             "Tron":"Digital pioneer.",
@@ -76,14 +76,30 @@
         };
         for(let i=23; i<=100; i++) { reviews[`Tape Slot ${i}`] = "Transmission pending... Insert new data here."; }
 
+        // Ultimate Game Stash Integration
         function startGame() {
             document.getElementById("arcade-view").style.display = "none";
-            const gameDiv = document.getElementById("game-canvas");
+            const gameDiv = document.getElementById("game");
             gameDiv.style.display = "block";
-            window.EJS_player = "#game-canvas"; window.EJS_core = "nes"; window.EJS_color = "#000000"; window.EJS_startOnLoaded = true;
-            window.EJS_pathtodata = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
-            window.EJS_gameUrl = "https://cdn.jsdelivr.net/gh/bubbls/UGS-file-encryption@07dd631136afe70d5b36871e4f387bc96fa4c261/Contra%20(USA).zip";
-            let loader = document.createElement("script"); loader.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js"; document.body.appendChild(loader);
+            
+            EJS_player = "#game";
+            EJS_core = "nes";
+            EJS_color = "#000000";
+            EJS_startOnLoaded = true;
+            EJS_pathtodata = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
+            EJS_gameUrl = "https://cdn.jsdelivr.net/gh/bubbls/UGS-file-encryption@07dd631136afe70d5b36871e4f387bc96fa4c261/Contra%20(USA).zip";
+            
+            loadGame();
+        }
+
+        function loadGame() {
+            var script1 = document.createElement("script");
+            script1.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js";
+            document.body.appendChild(script1);
+            
+            var script2 = document.createElement("script");
+            script2.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@ae2fcc6d6a9cd051654fcc0519080db1f79cf2a7/storage/js/cloak.js";
+            document.body.appendChild(script2);
         }
 
         function showReview(t) {
@@ -115,9 +131,9 @@
                             <div class="flex gap-2"><div class="arcade-button"></div><div class="arcade-button" style="background:red; box-shadow: 0 3px #800;"></div></div>
                         </div>
                     </div>
-                    <button onclick="startGame()" class="btn py-4 mt-8 w-64 text-lg" style="font-family:'Press Start 2P', cursive; background:#4CAF50; color:white; border:none;">INSERT COIN</button>
+                    <button id="startButton" onclick="startGame()" class="btn py-4 mt-8 w-64 text-lg" style="font-family:'Press Start 2P', cursive; background:#4CAF50; color:white; border:none;">INSERT COIN</button>
                 </div>
-                <div id="game-canvas" class="max-w-2xl mx-auto"></div>`,
+                <div id="game" class="max-w-2xl mx-auto"></div>`,
             movies: `
                 <h2 class="text-3xl text-orange-500 font-black mb-4 italic uppercase">VHS Library</h2>
                 <div class="inline-block p-4 border border-orange-500 bg-black mb-8 shadow-[0_0_20px_#ff8000]">
